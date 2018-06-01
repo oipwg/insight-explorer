@@ -1,0 +1,27 @@
+{
+  "name": "insight-explorer",
+  "version": "1.0.0",
+  "description": "Easily retreive information about transactions and addresses from any insight api explorer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Insight",
+    "Insight",
+    "API",
+    "blockchain",
+    "blockchain",
+    "explorer",
+    "oip",
+    "flo",
+    "bitcoin",
+    "litecoin",
+    "explorer",
+    "address",
+    "transaction",
+    "lookup"
+  ],
+  "author": "Sky Young <sky@alexandria.io>",
+  "license": "MIT"
+}
