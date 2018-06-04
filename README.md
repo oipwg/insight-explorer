@@ -272,7 +272,7 @@ explorer.getStatus("option").then(function(info){
 })
 ```
 
-Where `option" can be:
+Where `option` can be:
 
  * getInfo
  * getDifficulty
