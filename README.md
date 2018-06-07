@@ -1,3 +1,4 @@
+![](https://travis-ci.org/oipwg/insight-explorer.svg?branch=master)
 # Insight Explorer
 
 A simple NPM Module to get data back easily from any coins [Insight API](https://github.com/bitpay/insight-api) server. Created as a more compatable "open" version, vs being locked to a specific coin.
