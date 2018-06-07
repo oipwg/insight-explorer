@@ -106,20 +106,20 @@ test("getAddressProperties unconfirmedBalance", (done) => {
 })
 
 test("getAddressUtxo", (done) => {
-	explorer.getAddressUtxo("FUKsiTMSwLFqMoyJXPeeKEoPnHzZrndScJ").then((utxos) => {
-		expect(utxos[0].txid).toBe("b6f2a150f5b5b6360a07e8912b216d5b969880d2424782c4cffaca73d5e93ebc")
-		expect(utxos[0].scriptPubKey).toBe("76a914f6c35abbb1af0d6672a33d2789d08244b5fe5cf288ac")
+	explorer.getAddressUtxo("FFrfhbjbqgVNs6WYatav2wnb7LrCcmyDmm").then((utxos) => {
+		expect(utxos[0].txid).toBe("96ff94c61ab95312d8ae483f91ff28f49de4e2d2371ff182168ebfbdc5f54faf")
+		expect(utxos[0].scriptPubKey).toBe("76a9146dfc95ab490ec5090c1023043d2dc577b9d8be8988ac")
 		expect(utxos[0].amount).toBe(0.001)
 		done()
 	})
 })
 
 test("getAddressesUtxo", (done) => {
-	explorer.getAddressesUtxo(["FUKsiTMSwLFqMoyJXPeeKEoPnHzZrndScJ", "FFrfhbjbqgVNs6WYatav2wnb7LrCcmyDmm"]).then((utxos) => {
+	explorer.getAddressesUtxo(["FHQvhgDut1rn1nvQRZ3z9QgMEVMavRo2Tu", "FFrfhbjbqgVNs6WYatav2wnb7LrCcmyDmm"]).then((utxos) => {
 		for (utx of utxos){
 			var match = false;
 
-			if (utx.txid === "b6f2a150f5b5b6360a07e8912b216d5b969880d2424782c4cffaca73d5e93ebc" || utx.txid === "96ff94c61ab95312d8ae483f91ff28f49de4e2d2371ff182168ebfbdc5f54faf")
+			if (utx.txid === "5c951cf5821a41f4bb35e1aff044ff249ff2bfc4cb00710c9fd019fd5a9fda66" || utx.txid === "96ff94c61ab95312d8ae483f91ff28f49de4e2d2371ff182168ebfbdc5f54faf")
 				match = true;
 
 			expect(match).toBe(true);
@@ -145,9 +145,8 @@ test("getTransactionsForAddress", (done) => {
 
 test("getTransactionsForAddresses", (done) => {
 	explorer.getTransactionsForAddresses(["FUKsiTMSwLFqMoyJXPeeKEoPnHzZrndScJ", "FFrfhbjbqgVNs6WYatav2wnb7LrCcmyDmm"]).then((res) => {
-		expect(res.items[0].txid).toBe("96ff94c61ab95312d8ae483f91ff28f49de4e2d2371ff182168ebfbdc5f54faf")
-		expect(res.items[0].floData).toBe("text:Insight Tests")
-		expect(res.items[1].txid).toBe("b6f2a150f5b5b6360a07e8912b216d5b969880d2424782c4cffaca73d5e93ebc")
+		expect(res.items[0].txid).toBe("7687e361f00998f96b29938bf5b7d9003a15ec182c13b6ddbd5adc0f993cbf9c")
+		expect(res.items[1].txid).toBe("96ff94c61ab95312d8ae483f91ff28f49de4e2d2371ff182168ebfbdc5f54faf")
 		done()
 	})
 })
