@@ -274,6 +274,13 @@ explorer.getStatus("option").then(function(info){
 })
 ```
 
+### Get Exchange Rate
+```javascript
+explorer.getExchangeRate().then(function(info){
+    console.log(info);
+})
+```
+
 Where `option` can be:
 
  * getInfo

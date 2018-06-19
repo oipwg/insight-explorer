@@ -116,14 +116,12 @@ test("getAddressUtxo", (done) => {
 
 test("getAddressesUtxo", (done) => {
 	explorer.getAddressesUtxo(["FHQvhgDut1rn1nvQRZ3z9QgMEVMavRo2Tu", "FFrfhbjbqgVNs6WYatav2wnb7LrCcmyDmm"]).then((utxos) => {
+		var match = false;
 		for (utx of utxos){
-			var match = false;
-
-			if (utx.txid === "5c951cf5821a41f4bb35e1aff044ff249ff2bfc4cb00710c9fd019fd5a9fda66" || utx.txid === "96ff94c61ab95312d8ae483f91ff28f49de4e2d2371ff182168ebfbdc5f54faf")
+			if (utx.txid === "96ff94c61ab95312d8ae483f91ff28f49de4e2d2371ff182168ebfbdc5f54faf" || utx.txid === "714a1eb73a6e0ee9ec6b73b85f852e3ed4bd68ddf2e0e1f4bcef12ca36ba506c")
 				match = true;
-
-			expect(match).toBe(true);
 		}
+		expect(match).toBe(true);
 		done()
 	})
 })
@@ -179,3 +177,10 @@ test("getStatus", (done) => {
 	})
 })
 
+test("getExchangeRate", (done) => {
+	explorer.getExchangeRate().then((res) => {
+		console.log(res)
+		expect(res.data).toBeDefined()
+		done()
+	})
+})

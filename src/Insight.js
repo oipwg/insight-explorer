@@ -116,6 +116,9 @@ class Insight {
 	getStatus(query){
 		return this.api.get("/status?q=" + query).then((res) => { return res.data })
 	}
+	getExchangeRate(){
+		return this.api.get("/currency").then((res) => { return res.data })
+	}
 	estimateFee(nbBlocks){
 		var reqURL = "/utils/estimatefee";
 
