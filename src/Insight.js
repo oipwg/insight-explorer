@@ -10,16 +10,22 @@ class Insight {
 			baseURL: this.url
 		})
 	}
-	getBlock(hash){
-		return this.api.get("/block/" + hash).then((res) => { return res.data })
+	async getBlock(hash){
+		var response = await this.api.get("/block/" + hash)
+
+		return response.data
 	}
-	getBlockIndex(height){
-		return this.api.get("/block-index/" + height).then((res) => { return res.data })
+	async getBlockIndex(height){
+		var response = await this.api.get("/block-index/" + height)
+
+		return response.data
 	}
-	getRawBlock(block){
-		return this.api.get("/rawblock/" + block).then((res) => { return res.data })
+	async getRawBlock(block){
+		var response = await this.api.get("/rawblock/" + block)
+
+		return response.data
 	}
-	getBlockSummary(limit, blockDate){
+	async getBlockSummary(limit, blockDate){
 		var reqURL = "/blocks";
 		var addedQuestionMark = false;
 
@@ -39,15 +45,21 @@ class Insight {
 			reqURL += "blockDate=" + blockDate;
 		}
 
-		return this.api.get(reqURL).then((res) => { return res.data })
+		var response = await this.api.get(reqURL)
+
+		return response.data
 	}
-	getTransaction(txid){
-		return this.api.get("/tx/" + txid).then((res) => { return res.data })
+	async getTransaction(txid){
+		var response = await this.api.get("/tx/" + txid)
+
+		return response.data
 	}
-	getRawTransaction(txid){
-		return this.api.get("/rawtx/" + txid).then((res) => { return res.data })
+	async getRawTransaction(txid){
+		var response = await this.api.get("/rawtx/" + txid)
+
+		return response.data
 	}
-	getAddress(address, options){
+	async getAddress(address, options){
 		var reqURL = "/addr/" + address;
 		var addedQuestionMark = false;
 
@@ -78,54 +90,80 @@ class Insight {
 			}
 		}
 
-		return this.api.get(reqURL).then((res) => { return res.data })
+		var response = await this.api.get(reqURL)
+
+		return response.data
 	}
-	getAddressProperties(address, property){
-		return this.api.get("/addr/" + address + "/" + property).then((res) => { return res.data })
+	async getAddressProperties(address, property){
+		var response = await this.api.get("/addr/" + address + "/" + property)
+
+		return response.data
 	}
-	getAddressUtxo(address){
-		return this.api.get("/addr/" + address + "/utxo").then((res) => { return res.data })
+	async getAddressUtxo(address){
+		var response = await this.api.get("/addr/" + address + "/utxo")
+
+		return response.data
 	}
-	getAddressesUtxo(addresses){
-		return this.api.post("/addrs/utxo", {addrs: addresses.join()}).then((res) => { return res.data })
+	async getAddressesUtxo(addresses){
+		var response = await this.api.post("/addrs/utxo", {addrs: addresses.join()})
+
+		return response.data
 	}
-	getTransactionsForBlock(hash){
-		return this.api.get("/txs/?block=" + hash).then((res) => { return res.data })
+	async getTransactionsForBlock(hash){
+		var response = await this.api.get("/txs/?block=" + hash)
+
+		return response.data
 	}
-	getTransactionsForAddress(address){
-		return this.api.get("/txs/?address=" + address).then((res) => { return res.data })
+	async getTransactionsForAddress(address){
+		var response = await this.api.get("/txs/?address=" + address)
+
+		return response.data
 	}
-	getTransactionsForAddresses(addresses, options){
+	async getTransactionsForAddresses(addresses, options){
 		var opts = options || {};
 		opts.addrs = addresses.join();
 
-		return this.api.post("/addrs/txs", opts).then((res) => { return res.data })
+		var response = await this.api.post("/addrs/txs", opts)
+
+		return response.data
 	}
-	broadcastRawTransaction(rawtx, options){
+	async broadcastRawTransaction(rawtx, options){
 		var opts = options || {};
 		opts.rawtx = rawtx;
 
-		return this.api.post("/tx/send", opts).then((res) => { return res.data })
+		var response = await this.api.post("/tx/send", opts)
+
+		return response.data
 	}
-	getSync(){
-		return this.api.get("/sync").then((res) => { return res.data })
+	async getSync(){
+		var response = await this.api.get("/sync")
+
+		return response.data
 	}
-	getPeer(){
-		return this.api.get("/peer").then((res) => { return res.data })
+	async getPeer(){
+		var response = await this.api.get("/peer")
+
+		return response.data
 	}
-	getStatus(query){
-		return this.api.get("/status?q=" + query).then((res) => { return res.data })
+	async getStatus(query){
+		var response = await this.api.get("/status?q=" + query)
+
+		return response.data
 	}
-	getExchangeRate(){
-		return this.api.get("/currency").then((res) => { return res.data })
+	async getExchangeRate(){
+		var response = await this.api.get("/currency")
+
+		return response.data
 	}
-	estimateFee(nbBlocks){
+	async estimateFee(nbBlocks){
 		var reqURL = "/utils/estimatefee";
 
 		if (nbBlocks && nbBlocks !== "")
 			reqURL += "?nbBlocks=" + nbBlocks
 
-		return this.api.get(reqURL).then((res) => { return res.data })
+		var response = await this.api.get(reqURL)
+
+		return response.data
 	}
 	on(event, callback){
 		if (!this.socket){
