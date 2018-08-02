@@ -1,6 +1,6 @@
 {
   "name": "insight-explorer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Easily retreive information about transactions and addresses from any insight api explorer",
   "main": "lib/index.js",
   "scripts": {
@@ -33,5 +33,7 @@
     "babel-preset-es2015": "^6.24.1",
     "jest": "^23.1.0"
   },
-  "jest": { "testEnvironment": "node" }
+  "jest": {
+    "testEnvironment": "node"
+  }
 }

@@ -29,6 +29,12 @@ After you have imported the package, you will then need to create a new Insight 
 let explorer = new Insight("https://livenet.flocha.in/api")
 ```
 
+If you would like to disable websockets, then you can pass `false` as the second paramater to creating a new `Insight` object. This will turn off Websocket updates. Websockets are default on.
+
+```javascript
+let explorer = new Insight("https://livenet.flocha.in/api", false)
+```
+
 Now that we have created our Insight Explorer with the Insight API URL, we can query data from the blockchain.
 
 ### Block
@@ -298,57 +304,51 @@ explorer.estimateFee(nbBlocks).then(function(fee){
 
 
 ## Web Socket API
-The web socket API is served using [socket.io](http://socket.io).
 
-The following are the events published by insight:
-
-`tx`: new transaction received from network. This event is published in the 'inv' room. Data will be a app/models/Transaction object.
-Sample output:
+### Listen for new Transactions
+This is sent anytime a transaction gets added to the mempool
 ```javascript
-{
-  "txid":"00c1b1acb310b87085c7deaaeba478cef5dc9519fab87a4d943ecbb39bd5b053",
-  "processed":false
-  ...
-}
-```
-
-
-`block`: new block received from network. This event is published in the `inv` room. Data will be a app/models/Block object.
-Sample output:
-```javascript
-{
-  "hash":"000000004a3d187c430cd6a5e988aca3b19e1f1d1727a50dead6c8ac26899b96",
-  "time":1389789343,
-  ...
-}
-```
-
-`<address>`: new transaction concerning `<address>` received from network. This event is published in the `<address>` room.
-
-`status`: every 1% increment on the sync task, this event will be triggered. This event is published in the `sync` room.
-
-Sample output:
-```javascript
-{
-  blocksToSync: 164141,
-  syncedBlocks: 475,
-  upToExisting: true,
-  scanningBackward: true,
-  isEndGenesis: true,
-  end: "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943",
-  isStartGenesis: false,
-  start: "000000009f929800556a8f3cfdbe57c187f2f679e351b12f7011bfc276c41b6d"
-}
-```
-
-### Example Usage
-
-The following code connects to the Insight API socket.io server and asks for new transactions.
-
-```javascript
-explorer.on("tx", function(tx){
-    console.log(tx);
+explorer.onTX(function(tx){
+    console.log("Transaction Recieved! ", tx);
 })
+```
+
+### Listen for new Blocks
+This is sent anytime a block gets added to the chain
+```javascript
+explorer.onBlock(function(block){
+    console.log("Block Recieved! ", block);
+})
+```
+
+### Listen for Address updates
+This is sent anytime an address recieves or spends a transaction. If the address was used in a spend, the `type` will be `seen_in_tx_input`, if the address recieved funds, the `type` will be `seen_in_tx_output`.
+
+```javascript
+explorer.onAddressUpdate("odqpABssS7twQfwqNhQdb58c8RiG6awnCh", function(tx){
+    console.log("Address Update for odqpABssS7twQfwqNhQdb58c8RiG6awnCh Recieved! ", tx);
+})
+```
+
+Example Output
+```
+{ 
+    type: 'seen_in_tx_output',
+    txid: '2ffaefefe962698653160d135ee43c34d22487c47949cc944cf6f05436ee2b93',
+    updated_data: { 
+        addrStr: 'odqpABssS7twQfwqNhQdb58c8RiG6awnCh',
+        balance: 4.84555612,
+        balanceSat: 484555612,
+        totalReceived: 8.84422124,
+        totalReceivedSat: 884422124,
+        totalSent: 3.99866512,
+        totalSentSat: 399866512,
+        unconfirmedBalance: 0.132,
+        unconfirmedBalanceSat: 13200000,
+        unconfirmedTxApperances: 1,
+        txApperances: 57 
+    } 
+}
 ```
 
 ## License

@@ -1,6 +1,6 @@
 var Insight = require("../lib").Insight;
 
-var explorer = new Insight("https://livenet.flocha.in/api")
+var explorer = new Insight("https://livenet.flocha.in/api", false)
 
 test("getBlock", (done) => {
 	explorer.getBlock("628c568ca24b1b89d38a03fca447541b49479b9427e2ed13a55c872e5cb2fe63").then((block) => {
@@ -179,8 +179,20 @@ test("getStatus", (done) => {
 
 test("getExchangeRate", (done) => {
 	explorer.getExchangeRate().then((res) => {
-		console.log(res)
 		expect(res.data).toBeDefined()
 		done()
 	})
 })
+
+test("websocket, onTX", (done) => {
+	var websocketExplorer = new Insight("https://bitsight.mk1.alexandria.io/api")
+	websocketExplorer.onTX((message) => {
+		console.log("onTX: ", message);
+		expect(message).toBeDefined()
+
+		// Disconnect the websocket so it doesn't run and bug jest :p
+		websocketExplorer.socket.disconnect();
+		done()
+	})
+// This could take a while(?)
+}, 10000)

@@ -3,12 +3,27 @@ import socketio from 'socket.io-client'
 
 module.exports =
 class Insight {
-	constructor(url){
+	constructor(url, useWebSockets = true){
 		this.url = url;
 
 		this.api = axios.create({
 			baseURL: this.url
 		})
+
+		var urlNoTrail = this.url.split("/")
+		urlNoTrail.pop();
+		urlNoTrail = urlNoTrail.join("/")
+
+		this.socketReady = false
+		this.socketSubscribedToInv = false
+
+		if (useWebSockets){
+			this.socket = socketio(urlNoTrail);
+			this.socket.on("connect", () => {
+				this.socketReady = true;
+			})
+
+		}
 	}
 	async getBlock(hash){
 		var response = await this.api.get("/block/" + hash)
@@ -165,15 +180,35 @@ class Insight {
 
 		return response.data
 	}
-	on(event, callback){
-		if (!this.socket){
-			this.socket = socketio(this.url)
-		}
-
-		if (this.socket){
-			this.socket.on(event, callback);
+	onAddressUpdate(address, subscriberMethod){
+		if (this.socketReady){
+			this.socket.on(address, subscriberMethod)
 		} else {
-			console.error("Failure to subscribe to WebSocket!")
+			setTimeout(() => { this.onAddressTransaction(address, subscriberMethod) }, 100)
+		}
+	}
+	onTX(subscriberMethod){
+		if (this.socketReady){
+			this.socket.on('tx', subscriberMethod)
+
+			if (!this.socketSubscribedToInv){
+				this.socket.emit("subscribe", "inv")
+				this.socketSubscribedToInv = true
+			}
+		} else {
+			setTimeout(() => { this.onTX(subscriberMethod) }, 100)
+		}
+	}
+	onBlock(subscriberMethod){
+		if (this.socketReady){
+			this.socket.on('block', subscriberMethod)
+
+			if (!this.socketSubscribedToInv){
+				this.socket.emit("subscribe", "inv")
+				this.socketSubscribedToInv = true
+			}
+		} else {
+			setTimeout(() => { this.onBlock(subscriberMethod) }, 100)
 		}
 	}
 }
