@@ -10,14 +10,14 @@ class Insight {
 			baseURL: this.url
 		})
 
-		var urlNoTrail = this.url.split("/")
-		urlNoTrail.pop();
-		urlNoTrail = urlNoTrail.join("/")
-
 		this.socketReady = false
 		this.socketSubscribedToInv = false
 
 		if (useWebSockets){
+			var urlNoTrail = this.url.split("/")
+			urlNoTrail.pop();
+			urlNoTrail = urlNoTrail.join("/")
+			
 			this.socket = socketio(urlNoTrail);
 			this.socket.on("connect", () => {
 				this.socketReady = true;
@@ -26,17 +26,29 @@ class Insight {
 		}
 	}
 	async getBlock(hash){
-		var response = await this.api.get("/block/" + hash)
+		try {
+			var response = await this.api.get("/block/" + hash)
+		} catch (e) {
+			throw new Error("Unable to getBlock: " + e)
+		}
 
 		return response.data
 	}
 	async getBlockIndex(height){
-		var response = await this.api.get("/block-index/" + height)
+		try {
+			var response = await this.api.get("/block-index/" + height)
+		} catch (e) {
+			throw new Error("Unable to getBlockIndex: " + e)
+		}
 
 		return response.data
 	}
 	async getRawBlock(block){
-		var response = await this.api.get("/rawblock/" + block)
+		try {
+			var response = await this.api.get("/rawblock/" + block)
+		} catch (e) {
+			throw new Error("Unable to getRawBlock: " + e)
+		}
 
 		return response.data
 	}
@@ -60,17 +72,29 @@ class Insight {
 			reqURL += "blockDate=" + blockDate;
 		}
 
-		var response = await this.api.get(reqURL)
+		try {
+			var response = await this.api.get(reqURL)
+		} catch (e) {
+			throw new Error("Unable to getBlockSummary: " + e)
+		}
 
 		return response.data
 	}
 	async getTransaction(txid){
-		var response = await this.api.get("/tx/" + txid)
+		try {
+			var response = await this.api.get("/tx/" + txid)
+		} catch (e) {
+			throw new Error("Unable to getTransaction: " + e)
+		}
 
 		return response.data
 	}
 	async getRawTransaction(txid){
-		var response = await this.api.get("/rawtx/" + txid)
+		try {
+			var response = await this.api.get("/rawtx/" + txid)
+		} catch (e) {
+			throw new Error("Unable to getRawTransaction: " + e)
+		}
 
 		return response.data
 	}
@@ -105,32 +129,56 @@ class Insight {
 			}
 		}
 
-		var response = await this.api.get(reqURL)
+		try {
+			var response = await this.api.get(reqURL)
+		} catch (e) {
+			throw new Error("Unable to getAddress: " + e)
+		}
 
 		return response.data
 	}
 	async getAddressProperties(address, property){
-		var response = await this.api.get("/addr/" + address + "/" + property)
+		try {
+			var response = await this.api.get("/addr/" + address + "/" + property)
+		} catch (e) {
+			throw new Error("Unable to getAddressProperties: " + e)
+		}
 
 		return response.data
 	}
 	async getAddressUtxo(address){
-		var response = await this.api.get("/addr/" + address + "/utxo")
+		try {
+			var response = await this.api.get("/addr/" + address + "/utxo")
+		} catch (e) {
+			throw new Error("Unable to getAddressUtxo: " + e)
+		}
 
 		return response.data
 	}
 	async getAddressesUtxo(addresses){
-		var response = await this.api.post("/addrs/utxo", {addrs: addresses.join()})
+		try {
+			var response = await this.api.post("/addrs/utxo", {addrs: addresses.join()})
+		} catch (e) {
+			throw new Error("Unable to getAddressesUtxo: " + e)
+		}
 
 		return response.data
 	}
 	async getTransactionsForBlock(hash){
-		var response = await this.api.get("/txs/?block=" + hash)
+		try {
+			var response = await this.api.get("/txs/?block=" + hash)
+		} catch (e) {
+			throw new Error("Unable to getTransactionsForBlock: " + e)
+		}
 
 		return response.data
 	}
 	async getTransactionsForAddress(address){
-		var response = await this.api.get("/txs/?address=" + address)
+		try {
+			var response = await this.api.get("/txs/?address=" + address)
+		} catch (e) {
+			throw new Error("Unable to getTransactionsForAddress: " + e)
+		}
 
 		return response.data
 	}
@@ -138,7 +186,11 @@ class Insight {
 		var opts = options || {};
 		opts.addrs = addresses.join();
 
-		var response = await this.api.post("/addrs/txs", opts)
+		try {
+			var response = await this.api.post("/addrs/txs", opts)
+		} catch (e) {
+			throw new Error("Unable to getTransactionsForAddresses: " + e)
+		}
 
 		return response.data
 	}
@@ -146,27 +198,47 @@ class Insight {
 		var opts = options || {};
 		opts.rawtx = rawtx;
 
-		var response = await this.api.post("/tx/send", opts)
+		try {
+			var response = await this.api.post("/tx/send", opts)
+		} catch (e) {
+			throw new Error("Unable to broadcastRawTransaction: " + e)
+		}
 
 		return response.data
 	}
 	async getSync(){
-		var response = await this.api.get("/sync")
+		try {
+			var response = await this.api.get("/sync")
+		} catch (e) {
+			throw new Error("Unable to getSync: " + e)
+		}
 
 		return response.data
 	}
 	async getPeer(){
-		var response = await this.api.get("/peer")
+		try {
+			var response = await this.api.get("/peer")
+		} catch (e) {
+			throw new Error("Unable to getPeer: " + e)
+		}
 
 		return response.data
 	}
 	async getStatus(query){
-		var response = await this.api.get("/status?q=" + query)
+		try {
+			var response = await this.api.get("/status?q=" + query)
+		} catch (e) {
+			throw new Error("Unable to getStatus: " + e)
+		}
 
 		return response.data
 	}
 	async getExchangeRate(){
-		var response = await this.api.get("/currency")
+		try {
+			var response = await this.api.get("/currency")
+		} catch (e) {
+			throw new Error("Unable to getExchangeRate: " + e)
+		}
 
 		return response.data
 	}
@@ -176,7 +248,11 @@ class Insight {
 		if (nbBlocks && nbBlocks !== "")
 			reqURL += "?nbBlocks=" + nbBlocks
 
-		var response = await this.api.get(reqURL)
+		try {
+			var response = await this.api.get(reqURL)
+		} catch (e) {
+			throw new Error("Unable to estimateFee: " + e)
+		}
 
 		return response.data
 	}

@@ -185,9 +185,8 @@ test("getExchangeRate", (done) => {
 })
 
 test("websocket, onTX", (done) => {
-	var websocketExplorer = new Insight("https://bitsight.mk1.alexandria.io/api")
+	var websocketExplorer = new Insight("https://localbitcoinschain.com/api")
 	websocketExplorer.onTX((message) => {
-		console.log("onTX: ", message);
 		expect(message).toBeDefined()
 
 		// Disconnect the websocket so it doesn't run and bug jest :p
