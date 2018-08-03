@@ -184,7 +184,7 @@ class Insight {
 		if (this.socketReady){
 			this.socket.on(address, subscriberMethod)
 		} else {
-			setTimeout(() => { this.onAddressTransaction(address, subscriberMethod) }, 100)
+			setTimeout(() => { this.onAddressUpdate(address, subscriberMethod) }, 100)
 		}
 	}
 	onTX(subscriberMethod){
