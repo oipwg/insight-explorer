@@ -29,7 +29,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/block/" + hash)
 		} catch (e) {
-			throw new Error("Unable to getBlock: " + e)
+			throw new Error("Unable to getBlock: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -38,7 +38,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/block-index/" + height)
 		} catch (e) {
-			throw new Error("Unable to getBlockIndex: " + e)
+			throw new Error("Unable to getBlockIndex: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -47,7 +47,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/rawblock/" + block)
 		} catch (e) {
-			throw new Error("Unable to getRawBlock: " + e)
+			throw new Error("Unable to getRawBlock: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -75,7 +75,7 @@ class Insight {
 		try {
 			var response = await this.api.get(reqURL)
 		} catch (e) {
-			throw new Error("Unable to getBlockSummary: " + e)
+			throw new Error("Unable to getBlockSummary: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -84,7 +84,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/tx/" + txid)
 		} catch (e) {
-			throw new Error("Unable to getTransaction: " + e)
+			throw new Error("Unable to getTransaction: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -93,7 +93,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/rawtx/" + txid)
 		} catch (e) {
-			throw new Error("Unable to getRawTransaction: " + e)
+			throw new Error("Unable to getRawTransaction: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -132,7 +132,7 @@ class Insight {
 		try {
 			var response = await this.api.get(reqURL)
 		} catch (e) {
-			throw new Error("Unable to getAddress: " + e)
+			throw new Error("Unable to getAddress: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -141,7 +141,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/addr/" + address + "/" + property)
 		} catch (e) {
-			throw new Error("Unable to getAddressProperties: " + e)
+			throw new Error("Unable to getAddressProperties: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -150,7 +150,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/addr/" + address + "/utxo")
 		} catch (e) {
-			throw new Error("Unable to getAddressUtxo: " + e)
+			throw new Error("Unable to getAddressUtxo: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -159,7 +159,7 @@ class Insight {
 		try {
 			var response = await this.api.post("/addrs/utxo", {addrs: addresses.join()})
 		} catch (e) {
-			throw new Error("Unable to getAddressesUtxo: " + e)
+			throw new Error("Unable to getAddressesUtxo: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -168,7 +168,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/txs/?block=" + hash)
 		} catch (e) {
-			throw new Error("Unable to getTransactionsForBlock: " + e)
+			throw new Error("Unable to getTransactionsForBlock: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -177,7 +177,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/txs/?address=" + address)
 		} catch (e) {
-			throw new Error("Unable to getTransactionsForAddress: " + e)
+			throw new Error("Unable to getTransactionsForAddress: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -189,7 +189,7 @@ class Insight {
 		try {
 			var response = await this.api.post("/addrs/txs", opts)
 		} catch (e) {
-			throw new Error("Unable to getTransactionsForAddresses: " + e)
+			throw new Error("Unable to getTransactionsForAddresses: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -201,7 +201,7 @@ class Insight {
 		try {
 			var response = await this.api.post("/tx/send", opts)
 		} catch (e) {
-			throw new Error("Unable to broadcastRawTransaction: " + e)
+			throw new Error("Unable to broadcastRawTransaction: " + e.response.status + " " + e.response.statusText + " | " + e.response.data);
 		}
 
 		return response.data
@@ -210,7 +210,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/sync")
 		} catch (e) {
-			throw new Error("Unable to getSync: " + e)
+			throw new Error("Unable to getSync: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -219,7 +219,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/peer")
 		} catch (e) {
-			throw new Error("Unable to getPeer: " + e)
+			throw new Error("Unable to getPeer: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -228,7 +228,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/status?q=" + query)
 		} catch (e) {
-			throw new Error("Unable to getStatus: " + e)
+			throw new Error("Unable to getStatus: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -237,7 +237,7 @@ class Insight {
 		try {
 			var response = await this.api.get("/currency")
 		} catch (e) {
-			throw new Error("Unable to getExchangeRate: " + e)
+			throw new Error("Unable to getExchangeRate: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
@@ -251,7 +251,7 @@ class Insight {
 		try {
 			var response = await this.api.get(reqURL)
 		} catch (e) {
-			throw new Error("Unable to estimateFee: " + e)
+			throw new Error("Unable to estimateFee: " + e.response.status + " " + e.response.statusText + " | " + e.response.data)
 		}
 
 		return response.data
