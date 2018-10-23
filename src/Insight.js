@@ -3,7 +3,7 @@ import socketio from 'socket.io-client'
 
 module.exports =
 class Insight {
-	constructor(url, useWebSockets = true){
+	constructor(url, useWebSockets = false){
 		this.url = url;
 
 		this.api = axios.create({
@@ -269,7 +269,7 @@ class Insight {
 		} else {
 			extraErrorText = error.toString()
 		}
-		
+
 		return new Error("Unable to " + functionName + ": " + extraErrorText)
 	}
 	onAddressUpdate(address, subscriberMethod){
