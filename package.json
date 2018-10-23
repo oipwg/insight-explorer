@@ -1,6 +1,6 @@
 {
   "name": "insight-explorer",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "Easily retreive information about transactions and addresses from any insight api explorer",
   "main": "lib/index.js",
   "scripts": {
