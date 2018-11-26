@@ -29,10 +29,10 @@ After you have imported the package, you will then need to create a new Insight 
 let explorer = new Insight("https://livenet.flocha.in/api")
 ```
 
-If you would like to disable websockets, then you can pass `false` as the second paramater to creating a new `Insight` object. This will turn off Websocket updates. Websockets are default on.
+If you would like to enable websockets, then you can pass `true` as the second paramater to creating a new `Insight` object. This will turn on Websocket updates. Websockets are default off.
 
 ```javascript
-let explorer = new Insight("https://livenet.flocha.in/api", false)
+let explorer = new Insight("https://livenet.flocha.in/api", true)
 ```
 
 Now that we have created our Insight Explorer with the Insight API URL, we can query data from the blockchain.
