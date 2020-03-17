@@ -1,3 +1,3 @@
-import Insight from './Insight';
+import Insight from './Insight'
 
-module.exports = { Insight };
+module.exports = { Insight }

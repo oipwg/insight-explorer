@@ -1,66 +1,86 @@
 module.exports =
-class InsightGroup {
-	constructor(url){
-		this.url = url;
-	}
-	getBlock(hash){
-		
-	}
-	getBlockIndex(height){
+  class InsightGroup {
+    constructor (url) {
+      this.url = url
+    }
 
-	}
-	getRawBlock(hash){
+    getBlock (hash) {
 
-	}
-	getBlockSummary(limit, blockDate){
+    }
 
-	}
-	getTransaction(txid){
+    getBlockIndex (height) {
 
-	}
-	getRawTransaction(txid){
+    }
 
-	}
-	getAddress(address){
+    getRawBlock (hash) {
 
-	}
-	getAddressProperties(address, property){
+    }
 
-	}
-	getAddressUtxo(address){
+    getBlockSummary (limit, blockDate) {
 
-	}
-	getAddressesUtxo(addresses){
+    }
 
-	}
-	getTransactionsForBlock(hash){
+    getTransaction (txid) {
 
-	}
-	getTransactionsForAddress(address){
-		
-	}
-	getTransactionsForAddresses(addresses, options){
-		
-	}
-	broadcastRawTransaction(rawtx){
+    }
 
-	}
-	getSync(){
+    getRawTransaction (txid) {
 
-	}
-	getPeer(){
+    }
 
-	}
-	getStatus(query){
+    getAddress (address) {
 
-	}
-	on(event, callback){
-		
-	}
-	simpleGET(){
+    }
 
-	}
-	simplePOST(){
-		
-	}
-}
+    getAddressProperties (address, property) {
+
+    }
+
+    getAddressUtxo (address) {
+
+    }
+
+    getAddressesUtxo (addresses) {
+
+    }
+
+    getTransactionsForBlock (hash) {
+
+    }
+
+    getTransactionsForAddress (address) {
+
+    }
+
+    getTransactionsForAddresses (addresses, options) {
+
+    }
+
+    broadcastRawTransaction (rawtx) {
+
+    }
+
+    getSync () {
+
+    }
+
+    getPeer () {
+
+    }
+
+    getStatus (query) {
+
+    }
+
+    on (event, callback) {
+
+    }
+
+    simpleGET () {
+
+    }
+
+    simplePOST () {
+
+    }
+  }

@@ -29,12 +29,6 @@ After you have imported the package, you will then need to create a new Insight 
 let explorer = new Insight("https://livenet.flocha.in/api")
 ```
 
-If you would like to enable websockets, then you can pass `true` as the second paramater to creating a new `Insight` object. This will turn on Websocket updates. Websockets are default off.
-
-```javascript
-let explorer = new Insight("https://livenet.flocha.in/api", true)
-```
-
 Now that we have created our Insight Explorer with the Insight API URL, we can query data from the blockchain.
 
 ### Block
@@ -55,7 +49,7 @@ explorer.getBlockIndex("block_height").then(function(block){
 })
 ```
 This would return:
-```javascript
+```json
 {
   "blockHash":"block_hash"
 }
@@ -69,7 +63,7 @@ explorer.getRawBlock("block_hash").then(function(block){
 ```
 
 This would return:
-```javascript
+```json
 {
   "rawblock":"blockhexstring..."
 }
@@ -85,7 +79,7 @@ explorer.getBlockSummary(3, "2016-04-21").then(function(blocks){
 ```
 
 Example response:
-```javascript
+```json
 {
   "blocks": [
     {
@@ -200,7 +194,7 @@ explorer.getTransactionsForAddresses(["address1", "address2"], options).then(fun
 
 ##### Options
 
-```javascript
+```
 from (optional): 0
 to (optional): 20
 noAsm (optional): 1 (will omit script asm from results)
@@ -210,7 +204,7 @@ noSpent (option): 1 (will omit spent information per output)
 
 ##### Sample output
 
-```javascript
+```
 { totalItems: 100,
   from: 0,
   to: 20,
@@ -247,7 +241,7 @@ explorer.broadcastRawTransaction("raw_tx_hex").then(function(res){
 ```
 ##### Sample response
 
-```javascript
+```
   {
       txid: [:txid]
   }
@@ -301,9 +295,6 @@ explorer.estimateFee(nbBlocks).then(function(fee){
     console.log(fee);
 })
 ```
-
-
-## Web Socket API
 
 ### Listen for new Transactions
 This is sent anytime a transaction gets added to the mempool
