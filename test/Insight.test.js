@@ -1,7 +1,7 @@
 /* eslint-env jest */
 const Insight = require('../src').Insight
 
-const explorer = new Insight('https://livenet.flocha.in/api', false)
+const explorer = new Insight('https://livenet.flo.oip.fun/api', false)
 
 test('getBlock', (done) => {
   explorer.getBlock('628c568ca24b1b89d38a03fca447541b49479b9427e2ed13a55c872e5cb2fe63').then((block) => {
